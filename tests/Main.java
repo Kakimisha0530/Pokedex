@@ -1,4 +1,4 @@
-package cartes;
+package tests;
 
 public class Main
 {
