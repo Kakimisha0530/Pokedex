@@ -18,9 +18,5 @@ public abstract class Carte
 		return this.numero;
 	}
 
-	protected void setNumero(int numero) {
-		this.numero = numero;
-	}
-
 	public abstract String typeDeCarte();
 }
