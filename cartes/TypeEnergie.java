@@ -17,7 +17,7 @@ public interface TypeEnergie {
 	public static final int METAL = 8;
 	public static final int FEE = 9;
 	public static final int DRAGON = 10;
-	public static final String[] ENERGY_NAME = {};
+	public static final String[] ENERGY_NAME = {"INCOLORE","PLANTE","FEU","EAU","ELECTRIQUE","PSYCHIQUE","COMBAT","OBSCURITE","METAL","FEE","DRAGON"};
 	public static final String[] ENERGY_COLOR = {};
 	public static final String[] ENERGY_SYMBOL = {};
 }
