@@ -10,8 +10,8 @@ package cartes;
 public class Dresseur extends Carte{
 	private int type_dresseur;
 	private String actions;
-	private final String[] 	TYPE_NOM = {"","",""};
-	private final String[] 	TYPE_DESC = {"","",""};
+	private final String[] 	TYPE_DRESSEUR_NOM = {"Objet","Supporter","Stade"};
+	private final String[] 	TYPE_DRESSEUR_DESC = {"","",""};
 	
 	public Dresseur(int num,int type,String nom) {
 		super(num,nom);
