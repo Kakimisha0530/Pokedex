@@ -8,5 +8,5 @@ import java.io.Serializable;
  */
 public abstract class SauvegardeBinaire implements Serializable {
 
-	private static final long serialVersionUID = -8048762142267574952L;
+	private static final long serialVersionUID = 1L;
 }
