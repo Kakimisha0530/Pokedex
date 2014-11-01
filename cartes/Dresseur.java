@@ -9,6 +9,7 @@ package cartes;
  * 
  */
 public class Dresseur extends Carte {
+	private transient static final long serialVersionUID = 1L;
 	private int type_dresseur;
 	private String actions;
 	private static final String[] TYPE_DRESSEUR_NOM = { "Objet", "Supporter", "Stade" };

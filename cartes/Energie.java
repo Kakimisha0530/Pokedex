@@ -2,6 +2,7 @@ package cartes;
 
 public class Energie extends Carte {
 
+	private transient static final long serialVersionUID = 1L;
 	private int type_energie;
 
 	public Energie(int num, int type) {
@@ -24,7 +25,7 @@ public class Energie extends Carte {
 
 	public String toString() {
 		String chaine = this.type_de_carte();
-		chaine += "\t / \t" + TypeEnergie.NOMS[this.type_energie];
+		chaine += " / " + TypeEnergie.NOMS[this.type_energie];
 		chaine += "\n=========================";
 		chaine += "\n" + this.numero;
 		return chaine;

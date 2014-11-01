@@ -1,5 +1,6 @@
 package cartes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,9 @@ import java.util.ArrayList;
  * 
  * @author aicha
  */
-public class Attaque {
+public class Attaque implements Serializable{
+	
+	private transient static final long serialVersionUID = 1L;
 	private String nom;
 	private int degats;
 	private char bonus_char;

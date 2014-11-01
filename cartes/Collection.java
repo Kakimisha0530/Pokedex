@@ -26,22 +26,24 @@ public class Collection extends SauvegardeBinaire{
 			this.taille = taille;
 			this.collection = new ArrayList<>();
 		}
-		this.liste_de_cartes_uniques = new HashMap<>();
-		for(Carte c:collection){
-			this.actualiser(c);
-		}
+		this.actualiser();
 	}
 	
 	public Collection() {
 		this(TAILLE_PAR_DEFAUT);
 	}
 	
-	private void actualiser(Carte c){
-		this.liste_de_cartes_uniques.put(c.get_numero(), c);
-		if(this.statistiques.containsKey(c.get_numero()))
-				this.statistiques.put(c.get_numero(), this.statistiques.get(c.get_numero()) + 1);
-		else
-			this.statistiques.put(c.get_numero(), 1);
+	private void actualiser(){
+		this.liste_de_cartes_uniques = new HashMap<>();
+		this.statistiques = new HashMap<>();
+		for(Carte c:collection){
+			this.liste_de_cartes_uniques.put(c.get_numero(), c);
+			if(this.statistiques.containsKey(c.get_numero()))
+					this.statistiques.put(c.get_numero(), this.statistiques.get(c.get_numero()) + 1);
+			else
+				this.statistiques.put(c.get_numero(), 1);
+		}
+		this.sauvegarder();
 	}
 
 	public void supprimer_une_carte(int index) {
@@ -51,15 +53,20 @@ public class Collection extends SauvegardeBinaire{
 			if(this.statistiques.get(carte.get_numero()) < 1)
 				this.liste_de_cartes_uniques.remove(carte.get_numero());
 			this.collection.remove(index);
-			this.sauvegarder();
+			this.actualiser();
 		}
 	}
 
-	public boolean ajouter_une_carte(Carte carte) {
+	public boolean ajouter_une_carte(Carte carte,boolean modif) {
 		if(carte != null && carte.numero_inferieur_a(this.taille)){
-			this.collection.add(carte);
-			this.actualiser(carte);
-			this.sauvegarder();
+			if(modif){
+				this.collection.remove(carte);
+				for(int i = 0;i < this.statistiques.get(carte.get_numero());i++)
+					this.collection.add(carte);
+			}
+			else
+				this.collection.add(carte);
+			this.actualiser();
 			return true;
 		}
 		return false;
@@ -69,8 +76,7 @@ public class Collection extends SauvegardeBinaire{
 		if(this.existe_carte(num)){
 			Carte c = this.liste_de_cartes_uniques.get(num).copier_carte();
 			this.collection.add(c);
-			this.actualiser(c);
-			this.sauvegarder();
+			this.actualiser();
 			return true;
 		}
 		return false;
@@ -82,7 +88,7 @@ public class Collection extends SauvegardeBinaire{
 	}
 	
 	public String consulter_la_carte(int numero) {
-		return (this.liste_de_cartes_uniques.get(numero) != null) ? this.collection
+		return (this.liste_de_cartes_uniques.get(numero) != null) ? this.liste_de_cartes_uniques
 				.get(numero).toString() : "";
 	}
 	

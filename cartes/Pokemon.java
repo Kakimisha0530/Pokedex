@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 public class Pokemon extends Carte
 {
+	private transient static final long serialVersionUID = 1L;
 	private int niveau;
 	private int points_de_vie;
 	private int type_energie;

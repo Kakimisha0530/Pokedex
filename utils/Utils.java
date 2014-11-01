@@ -20,8 +20,4 @@ public class Utils {
 	public static boolean chaine_non_vide(String s) {
 		return s.replace(" ", "").isEmpty();
 	}
-	
-	public static void main(String[] args) {
-		
-	}
 }

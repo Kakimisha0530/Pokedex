@@ -1,6 +1,10 @@
 package cartes;
 
-public abstract class Carte {
+import java.io.Serializable;
+
+public abstract class Carte implements Serializable{
+	
+	private transient static final long serialVersionUID = 1L;
 	protected String nom;
 	protected int numero;
 
