@@ -14,5 +14,6 @@ public abstract class Carte {
 	}
 
 	public abstract String type_de_carte();
+	
 	// public abstract String afficher_carte();
 }

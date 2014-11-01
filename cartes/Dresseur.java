@@ -25,6 +25,11 @@ public class Dresseur extends Carte {
 		return "DRESSEUR";
 	}
 
+	public void affiche_dresseurs_types() {
+		for (int i = 0; i < this.TYPE_DRESSEUR_NOM.length; i++)
+			System.out.print((i + 1) + ". " + this.TYPE_DRESSEUR_NOM[i] + "\t");
+	}
+
 	public String toString() {
 		String chaine = this.type_de_carte();
 		chaine += "\t / \t" + this.TYPE_DRESSEUR_NOM[this.type_dresseur];

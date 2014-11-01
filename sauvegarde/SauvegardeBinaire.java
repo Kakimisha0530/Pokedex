@@ -1,5 +1,6 @@
 package sauvegarde;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,14 +30,17 @@ public abstract class SauvegardeBinaire implements Serializable {
 
 	public boolean sauvegarder() {
 		try {
-			FileOutputStream fichier = new FileOutputStream(this.repertoire
-					+ this.NOM_FICHIER);
+			File temp = new File(this.repertoire);
+			if(!temp.exists())
+				temp.mkdirs();
+			FileOutputStream fichier = new FileOutputStream(this.repertoire + this.NOM_FICHIER);
 			ObjectOutputStream stream = new ObjectOutputStream(fichier);
 			stream.writeObject(this);
 			stream.flush();
 			stream.close();
 			return true;
 		} catch (IOException e) {
+			System.out.println(e);
 			return false;
 		}
 	}

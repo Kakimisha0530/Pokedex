@@ -16,10 +16,14 @@ public class Pokemon extends Carte
 	private final String[] 	NIVEAU_NOM = {"Basic","Niveau 1","Niveau 2"};
 	
 	
-	public Pokemon(int num,String nom,int niveau) {
+	public Pokemon(int num,String nom,int niveau,ArrayList<Attaque> attaques) {
 		super(num,nom);
-		this.attaques = new ArrayList<>();
+		if(attaques != null)
+			this.attaques = attaques;
+		else
+			this.attaques = new ArrayList<>();
 	}
+	
 	
 	@Override
 	public String type_de_carte() {
@@ -30,7 +34,7 @@ public class Pokemon extends Carte
 		String chaine = this.NIVEAU_NOM[this.niveau];
 		chaine += "\t / \t" + this.nom;
 		chaine += "\t / \t" + this.points_de_vie;
-		chaine += "\t / \t" + TypeEnergie.ENERGY_NAME[this.type_energie];
+		chaine += "\t / \t" + TypeEnergie.NOMS[this.type_energie];
 		chaine += "\n========================================";
 		for(int i = 0; i < attaques.size();i++){
 			chaine += "\n" + this.attaques.get(i).toString();

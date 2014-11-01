@@ -25,6 +25,7 @@ public class Attaque {
 		if (this.energies == null)
 			this.energies = new ArrayList<>();
 	}
+	
 
 	/**
 	 * Retourne les d&eacute;gats totaux &agrave; inflig&eacute;s par l'attaque.<br>
@@ -61,7 +62,7 @@ public class Attaque {
 	public String toString() {
 		String chaine = "";
 		for (int energie : this.energies) {
-			chaine += TypeEnergie.ENERGY_SYMBOL[energie];
+			chaine += TypeEnergie.SYMBOLES[energie];
 		}
 		chaine += "\t" + this.nom;
 		chaine += "\t" + this.degats + this.bonus_char;
