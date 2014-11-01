@@ -73,7 +73,7 @@ public class Attaque {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof Attaque) {
+		if (obj != null && obj instanceof Attaque && super.equals(obj)) {
 			Attaque att = (Attaque) obj;
 			return this.nom.equals(att.nom) && this.degats == att.degats
 					&& this.bonus_char == att.bonus_char

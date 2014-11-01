@@ -12,8 +12,23 @@ public abstract class Carte {
 	public boolean numero_inferieur_a(int taille){
 		return this.numero <= taille;
 	}
+	
+	public int get_numero(){
+		return this.numero;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Carte) {
+			Carte carte = (Carte) obj;
+			return this.numero == carte.numero;
+		}
+		return false;
+	}
 
 	public abstract String type_de_carte();
 	
-	// public abstract String afficher_carte();
+	public abstract Carte copier_carte();
+	
+
 }

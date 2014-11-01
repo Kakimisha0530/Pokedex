@@ -44,4 +44,9 @@ public class Pokemon extends Carte
 		chaine += "\n" + this.numero;
 		return chaine;
 	}
+
+	@Override
+	public Carte copier_carte() {
+		return new Pokemon(this.numero, this.nom, this.niveau, this.attaques);
+	}
 }

@@ -40,7 +40,7 @@ public abstract class SauvegardeBinaire implements Serializable {
 			stream.close();
 			return true;
 		} catch (IOException e) {
-			System.out.println(e);
+			//System.out.println(e);
 			return false;
 		}
 	}

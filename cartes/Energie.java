@@ -30,4 +30,9 @@ public class Energie extends Carte {
 		return chaine;
 	}
 
+	@Override
+	public Carte copier_carte() {
+		return new Energie(this.numero, this.type_energie);
+	}
+
 }

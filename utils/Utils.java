@@ -16,4 +16,12 @@ public class Utils {
 		}
 		return true;
 	}
+	
+	public static boolean chaine_non_vide(String s) {
+		return s.replace(" ", "").isEmpty();
+	}
+	
+	public static void main(String[] args) {
+		
+	}
 }
