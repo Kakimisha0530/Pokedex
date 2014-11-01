@@ -14,33 +14,16 @@ public class Attaque {
 	private String description;
 	private ArrayList<Integer> energies;
 
-	/**
-	 * Constructeur de la classe
-	 * 
-	 * @param nom
-	 *            : nom de l'attaque
-	 * @param degats
-	 *            : nombre de d&eacute;gats inflig&eacute;s par l'attaque
-	 * @param bonus_char
-	 *            : op&eacute;rateur pour le calcul des d&eacute;gats totaux
-	 * @param description
-	 *            : description de l'attaque
-	 */
-	public Attaque(String nom, int degats, char bonus_char, String description) {
+	public Attaque(String nom, int degats, char bonus_char, String description,
+			ArrayList<Integer> energies) {
 		this.nom = nom;
 		this.degats = degats;
-		this.setBonus_char(bonus_char);
+		this.bonus_char = (bonus_char != '+' && bonus_char != '*' && bonus_char != '-') ? ' '
+				: bonus_char;
 		this.description = description;
-		this.energies = new ArrayList<>();
-	}
-
-	/**
-	 * Retourne le nom de l'attaque
-	 * 
-	 * @return
-	 */
-	public String getNom() {
-		return this.nom;
+		this.energies = energies;
+		if (this.energies == null)
+			this.energies = new ArrayList<>();
 	}
 
 	/**
@@ -55,64 +38,48 @@ public class Attaque {
 	 * 
 	 * @return
 	 */
-	public int getDegats(int bonus) {
+	public int degats_totaux(int bonus) {
 		int total_degat = this.degats;
 		int symbol = (int) this.bonus_char;
 		switch (symbol) {
-			case 42 : total_degat *= bonus; break;
-			case 43 : total_degat += bonus; break;
-			case 45 : total_degat -= bonus; break;
-			default : break;
+		case 42:
+			total_degat *= bonus;
+			break;
+		case 43:
+			total_degat += bonus;
+			break;
+		case 45:
+			total_degat -= bonus;
+			break;
+		default:
+			break;
 		}
 		return total_degat;
 	}
 
-	/**
-	 * Retourne une chaine de caract&egrave;res repr&eacute;sentant le nombre de
-	 * d&eacute;gat inflig&eacute; par l'attaque
-	 * 
-	 * @return
-	 */
-	public String getDegatsString() {
-		return this.degats + "" + this.bonus_char;
+	@Override
+	public String toString() {
+		String chaine = "";
+		for (int energie : this.energies) {
+			chaine += TypeEnergie.ENERGY_SYMBOL[energie];
+		}
+		chaine += "\t" + this.nom;
+		chaine += "\t" + this.degats + this.bonus_char;
+		if (this.description != "")
+			chaine += "\n" + this.description;
+		return chaine;
 	}
 
-	/**
-	 * Retourne la description de l'attaque
-	 * 
-	 * @return
-	 */
-	public String getDescription() {
-		return this.description;
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Attaque) {
+			Attaque att = (Attaque) obj;
+			return this.nom.equals(att.nom) && this.degats == att.degats
+					&& this.bonus_char == att.bonus_char
+					&& this.description.equals(att.description)
+					&& this.energies.equals(att.energies);
+		}
+		return false;
 	}
 
-	/**
-	 * Le type d'&eacute;nergie correspondant &agrave; l'index fourni
-	 * 
-	 * @return
-	 */
-	public int getEnergie(int index) {
-		return this.energies.get(index);
-	}
-
-	/**
-	 * Ajout d'un type d'&eacute;nergie n&eacute;cessaire pour l'attaque
-	 * 
-	 * @param en
-	 */
-	public void addEnergie(int en) {
-		this.energies.add(en);
-	}
-
-	/**
-	 * Permet de definir l'op&eacute;rateur pour le calcul du total des
-	 * d&eacute;gats
-	 * 
-	 * @param
-	 */
-	private void setBonus_char(char bonus_char) {
-
-		this.bonus_char = (bonus_char != '+' && bonus_char != '*' && bonus_char != '-') ? ' '
-				: bonus_char;
-	}
 }
