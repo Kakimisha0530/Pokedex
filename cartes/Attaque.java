@@ -65,13 +65,17 @@ public class Attaque implements Serializable{
 	public String toString() {
 		String chaine = "";
 		for (int energie : this.energies) {
-			chaine += TypeEnergie.SYMBOLES[energie];
+			chaine += "[" + TypeEnergie.SYMBOLES[energie] + "] ";
 		}
 		chaine += "\t" + this.nom;
 		chaine += "\t" + this.degats + this.bonus_char;
 		if (this.description != "")
 			chaine += "\n" + this.description;
 		return chaine;
+	}
+	
+	public String get_nom(){
+		return this.nom;
 	}
 
 	@Override

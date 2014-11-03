@@ -1,5 +1,7 @@
 package cartes;
 
+import java.util.HashMap;
+
 /**
  * Cette classe repr&eacute;sente les cartes de type Dresseur. Ils en existe
  * trois types qui sont : Chaque carte poss&egrave;de un nom, un numero dans la
@@ -12,8 +14,8 @@ public class Dresseur extends Carte {
 	private transient static final long serialVersionUID = 1L;
 	private int type_dresseur;
 	private String actions;
-	private static final String[] TYPE_DRESSEUR_NOM = { "Objet", "Supporter", "Stade" };
-	private static final String[] TYPE_DRESSEUR_REGLE = { "", "", "" };
+	private transient static final String[] TYPE_DRESSEUR_NOM = { "Objet", "Supporter", "Stade" };
+	private transient static final String[] TYPE_DRESSEUR_REGLE = { "", "", "" };
 
 	public Dresseur(int num, int type, String nom, String actions) {
 		super(num, nom);
@@ -33,15 +35,12 @@ public class Dresseur extends Carte {
 
 	public String toString() {
 		String chaine = this.type_de_carte();
-		chaine += "\t / \t" + TYPE_DRESSEUR_NOM[this.type_dresseur];
+		chaine += " / " + TYPE_DRESSEUR_NOM[this.type_dresseur];
+		chaine += "\nNom :" + this.nom;
+		chaine += "\nActions : " + this.actions;
+		chaine += "\nRegles : " + TYPE_DRESSEUR_REGLE[this.type_dresseur];
 		chaine += "\n=========================";
-		chaine += "\n" + this.nom;
-		chaine += "\n=========================\n";
-		chaine += "\n" + this.actions + "\n";
-		chaine += "\n=========================";
-		chaine += "\n" + TYPE_DRESSEUR_REGLE[this.type_dresseur];
-		chaine += "\n=========================";
-		chaine += "\n" + this.numero;
+		chaine += "\nN° : " + this.numero;
 
 		return chaine;
 	}
@@ -49,5 +48,19 @@ public class Dresseur extends Carte {
 	@Override
 	public Carte copier_carte() {
 		return new Dresseur(this.numero, this.type_dresseur, this.nom, this.actions);
+	}
+	
+	@Override
+	public Carte modifier_carte(HashMap<String, Object> map) {
+		String nom = this.nom,actions = this.actions;
+		int type = this.type_dresseur;
+		if(map.get("nom") instanceof String && !map.get("nom").equals(""))
+			nom = map.get("nom").toString();
+		if(map.get("actions") instanceof String && !map.get("actions").equals(this.actions))
+			actions = map.get("actions").toString();
+		if(map.get("type") instanceof Integer)
+			type = ((Integer)map.get("type") < 0 || (Integer)map.get("type") > TYPE_DRESSEUR_NOM.length)?this.type_dresseur:(Integer)map.get("type");
+		
+		return new Dresseur(this.numero, type , nom,actions);
 	}
 }

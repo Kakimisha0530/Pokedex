@@ -24,7 +24,7 @@ public class Menu {
 
 		while (!arreter) {
 			this.afficher_menu();
-			choix = Integer.parseInt(Menu.redemander_saisie(entree,0));
+			choix = Integer.parseInt(Menu.redemander_saisie(entree,0,false));
 			arreter = this.lancer_menu_choix(choix,pokemon);
 		}
 		
@@ -33,12 +33,16 @@ public class Menu {
 		System.out.println("AU REVOIR !!!");
 	}
 
-	public static String redemander_saisie(Scanner entree, int type) {
+	public static String redemander_saisie(Scanner entree, int type, boolean vide) {
 		String saisie = "";
 		//boolean bon_type;
-		if(type > 0)
-			while (Utils.chaine_non_vide(saisie = entree.nextLine()))
-				System.out.println("Veuilez entrer un texte non vide : ");
+		if(type > 0){
+			if(vide)
+				saisie = entree.nextLine();
+			else
+				while (Utils.chaine_non_vide(saisie = entree.nextLine()))
+					System.out.println("Veuilez entrer un texte non vide : ");
+		}
 		else
 			while (!Utils.isInteger(saisie = entree.nextLine()))
 				System.out.println("Cette entree n'est pas valide. Veuillez recommencer : ");

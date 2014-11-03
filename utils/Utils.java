@@ -20,4 +20,8 @@ public class Utils {
 	public static boolean chaine_non_vide(String s) {
 		return s.replace(" ", "").isEmpty();
 	}
+	
+	public static String nettoyer_chaine(String s) {
+		return s.replace(" ", "").replace("\t","").replace("\n","").replace("\r","");
+	}
 }

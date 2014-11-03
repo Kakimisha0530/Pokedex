@@ -56,6 +56,13 @@ public class Collection extends SauvegardeBinaire{
 			this.actualiser();
 		}
 	}
+	
+	public void modifier_une_carte(int numero,HashMap<String, Object> map){
+		if(existe_carte(numero)){
+			Carte carte = this.liste_de_cartes_uniques.get(numero).modifier_carte(map);
+			ajouter_une_carte(carte, true);
+		}
+	}
 
 	public boolean ajouter_une_carte(Carte carte,boolean modif) {
 		if(carte != null && carte.numero_inferieur_a(this.taille)){
@@ -81,19 +88,14 @@ public class Collection extends SauvegardeBinaire{
 		}
 		return false;
 	}
-
-	public String voir_la_carte(int index) {
-		return (this.collection.get(index) != null) ? this.collection
-				.get(index).toString() : "";
-	}
 	
 	public String consulter_la_carte(int numero) {
-		return (this.liste_de_cartes_uniques.get(numero) != null) ? this.liste_de_cartes_uniques
-				.get(numero).toString() : "";
+		return (this.liste_de_cartes_uniques.get(numero) != null) ? (this.liste_de_cartes_uniques
+				.get(numero).toString() + "\nExemplaires : " + this.statistiques.get(numero)) : "Cette carte n'existe pas";
 	}
 	
 	public boolean existe_carte(int numero){
-		return liste_de_cartes_uniques.containsKey(numero);
+		return this.liste_de_cartes_uniques.containsKey(numero);
 	}
 	
 
@@ -104,6 +106,29 @@ public class Collection extends SauvegardeBinaire{
 			this.taille = jeu.taille;
 			this.collection = jeu.collection;
 		}			
+	}
+	
+	public String toString(){
+		String sep = "\n*****************************************************";
+		String chaine = "";
+		chaine += sep;
+		
+		if(this.collection.size() > 0){
+			for (int num : this.liste_de_cartes_uniques.keySet()) {
+				chaine += "\n" + this.consulter_la_carte(num);
+				chaine += sep;
+			}
+		}
+		else
+			chaine += "\nVous n'avez encore aucune carte !!" + sep;
+		
+		return chaine;
+	}
+
+	public String get_type(int numero) {
+		if(existe_carte(numero))
+			return this.liste_de_cartes_uniques.get(numero).type_de_carte();
+		return "";
 	}
 	
 	

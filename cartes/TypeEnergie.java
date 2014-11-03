@@ -18,6 +18,6 @@ public interface TypeEnergie {
 	public static final int FEE = 9;
 	public static final int DRAGON = 10;
 	public static final String[] NOMS = {"INCOLORE","PLANTE","FEU","EAU","ELECTRIQUE","PSYCHIQUE","COMBAT","OBSCURITE","METAL","FEE","DRAGON"};
-	public static final String[] COULEURS = {};
-	public static final String[] SYMBOLES = {};
+	public static final String[] COULEURS = {"I","PL","FI","E","EL","PS","C","O","M","FE","D"};
+	public static final String[] SYMBOLES = {"I","PL","FI","E","EL","PS","C","O","M","FE","D"};
 }
