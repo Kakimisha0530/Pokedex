@@ -65,7 +65,7 @@ public class Collection extends SauvegardeBinaire{
 	public boolean ajouter_une_carte(Carte carte,boolean modif) {
 		if(carte != null && carte.numero_inferieur_a(this.taille)){
 			if(modif){
-				this.collection.remove(carte);
+				this.supprimer_une_carte(carte.get_numero(), this.statistiques.get(carte.get_numero()));
 				for(int i = 0;i < this.statistiques.get(carte.get_numero());i++)
 					this.collection.add(carte);
 			}
