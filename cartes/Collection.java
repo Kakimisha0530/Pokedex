@@ -81,7 +81,7 @@ public class Collection extends SauvegardeBinaire{
 	
 	public boolean copier_carte(int num){
 		if(this.existe_carte(num)){
-			Carte c = this.liste_de_cartes_uniques.get(num).copier_carte();
+			Carte c = (Carte)this.liste_de_cartes_uniques.get(num).clone();
 			this.collection.add(c);
 			this.actualiser();
 			return true;

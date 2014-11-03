@@ -3,7 +3,7 @@ package cartes;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public abstract class Carte implements Serializable{
+public abstract class Carte implements Serializable,Cloneable{
 	
 	private transient static final long serialVersionUID = 1L;
 	protected String nom;
@@ -33,12 +33,18 @@ public abstract class Carte implements Serializable{
 
 	public abstract String type_de_carte();
 	
-	public abstract Carte copier_carte();
+	@Override
+	public Object clone() {
+		Object o = null;
+		try {
+			o = super.clone();
+		}
+		catch(CloneNotSupportedException cnse) {
+			cnse.printStackTrace(System.err);
+		}
+		return o;
+	}
 
-	/**
-	 * @param map
-	 * @return
-	 */
 	public abstract Carte modifier_carte(HashMap<String, Object> map);
 	
 }

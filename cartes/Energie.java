@@ -35,8 +35,10 @@ public class Energie extends Carte {
 	}
 
 	@Override
-	public Carte copier_carte() {
-		return new Energie(this.numero, this.type_energie);
+	public Object clone() {
+		Energie temp = (Energie)super.clone();
+		temp.type_energie = this.type_energie;
+		return temp;
 	}
 	
 	@Override

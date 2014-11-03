@@ -46,8 +46,11 @@ public class Dresseur extends Carte {
 	}
 
 	@Override
-	public Carte copier_carte() {
-		return new Dresseur(this.numero, this.type_dresseur, this.nom, this.actions);
+	public Object clone() {
+		Dresseur temp = (Dresseur)super.clone();
+		temp.actions = this.actions;
+		temp.type_dresseur = this.type_dresseur;
+		return temp;
 	}
 	
 	@Override

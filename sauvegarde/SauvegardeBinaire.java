@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 /**
@@ -26,11 +27,22 @@ public abstract class SauvegardeBinaire implements Serializable {
 		String uri = chemin.getPath();
 		this.repertoire = uri.split("bin")[0];
 		this.repertoire += "ressources/binaire/";
+		boolean decoder = false;
+		try {
+			uri = java.net.URLDecoder.decode(this.repertoire, "UTF-8");
+			decoder = true;
+		} catch (UnsupportedEncodingException e) {
+			decoder = false;
+		}
+		if(decoder)
+			this.repertoire = uri;
+		//System.out.println("1 . " + this.repertoire);
 	}
 
 	public boolean sauvegarder() {
 		try {
 			File temp = new File(this.repertoire);
+			//System.out.println(this.repertoire);
 			if(!temp.exists())
 				temp.mkdirs();
 			FileOutputStream fichier = new FileOutputStream(this.repertoire + this.NOM_FICHIER);
@@ -46,6 +58,7 @@ public abstract class SauvegardeBinaire implements Serializable {
 	}
 
 	protected boolean recuperer() {
+		//System.out.println("recuperation a partir de " + this.repertoire + this.NOM_FICHIER);
 		try {
 			FileInputStream fichier = new FileInputStream(this.repertoire
 					+ this.NOM_FICHIER);

@@ -48,7 +48,7 @@ public class Pokemon extends Carte
 			i++;
 		}
 		chaine += "\n========================================";
-		chaine += "\nNÂ° : " + this.numero;
+		chaine += "\nN° : " + this.numero;
 		return chaine;
 	}
 	
@@ -58,8 +58,13 @@ public class Pokemon extends Carte
 	}
 
 	@Override
-	public Carte copier_carte() {
-		return new Pokemon(this.numero, this.type_energie , this.points_de_vie, this.nom, this.niveau, this.attaques);
+	public Object clone() {
+		Pokemon temp = (Pokemon)super.clone();
+		temp.attaques = this.attaques;
+		temp.niveau = this.niveau;
+		temp.points_de_vie = this.points_de_vie;
+		temp.type_energie = this.type_energie;
+		return temp;
 	}
 
 
