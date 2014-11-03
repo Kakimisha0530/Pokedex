@@ -66,4 +66,10 @@ public class Dresseur extends Carte {
 		
 		return new Dresseur(this.numero, type , nom,actions);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
 }

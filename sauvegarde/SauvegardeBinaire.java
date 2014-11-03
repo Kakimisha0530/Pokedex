@@ -58,7 +58,6 @@ public abstract class SauvegardeBinaire implements Serializable {
 	}
 
 	protected boolean recuperer() {
-		//System.out.println("recuperation a partir de " + this.repertoire + this.NOM_FICHIER);
 		try {
 			FileInputStream fichier = new FileInputStream(this.repertoire
 					+ this.NOM_FICHIER);

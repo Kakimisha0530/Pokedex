@@ -19,9 +19,72 @@ import cartes.Pokemon;
  * 
  */
 public class SousMenus {
+	
+	public static boolean lancer(int menu,Collection collection){
+		boolean stop = false;
+		switch (menu) {
+		case Menu.AJOUTER:
+			SousMenus.ajouter(collection,false);
+			break;
+		case Menu.SUPPRIMER:
+			SousMenus.supprimer(collection);
+			break;
+		case Menu.MODIFIER:
+			SousMenus.ajouter(collection,true);
+			break;
+		case Menu.CONSULTER:
+			SousMenus.consulter(collection);
+			break;
+		case Menu.RECHERCHER:
+			SousMenus.rechercher(collection);
+			break;
+		case Menu.QUITTER:
+			stop = true;
+			break;
 
-	static class Ajout {		
-		public static void lancer(Collection collection, boolean modif) {
+		default:
+			System.out.println("Cette entree n'est pas valide. Veuillez recommencer : ");
+			break;
+		}
+		return stop;
+	}
+	
+	private static void afficher_choix_type(){
+		System.out.println("De quel type est la carte ? ");
+		System.out.print("1. Pokemon\t");
+		System.out.print("2. Dresseur\t");
+		System.out.print("3. Energie\n");
+	}
+	
+	private static int choix_type(String nom){
+		int choix = -1;
+		switch (nom.toLowerCase()) {
+		case "pokemon":choix = 1;
+			break;
+		case "dresseur": choix = 2;
+			break;
+		case "energie": choix = 3;
+			break;
+		}
+		
+		return choix;
+	}
+	
+	private static String choix_type(int type){
+		String choix = "";
+		switch (type) {
+		case 1:choix = "pokemon";
+			break;
+		case 2: choix = "dresseur";
+			break;
+		case 3: choix = "energie";
+			break;
+		}
+		
+		return choix;
+	}
+
+	private static void ajouter(Collection collection, boolean modif) {
 			Scanner entree = new Scanner(System.in);
 			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("Saisissez le numero de la carte : ");
@@ -61,7 +124,7 @@ public class SousMenus {
 						Pokemon temp = new Pokemon(numero, 0, 0, "", 0, null);
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_pokemon(entree, modif)),modif);
 					}
-					System.out.println("La carte POKEMON NÂ°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte POKEMON N°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				case 2:
 					if(modif)
@@ -70,7 +133,7 @@ public class SousMenus {
 						Dresseur temp = new Dresseur(numero, 0, "", "");
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_dresseur(entree, modif)),modif);
 					}
-					System.out.println("La carte DRESSEUR NÂ°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte DRESSEUR N°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				case 3:
 					if(modif)
@@ -79,33 +142,12 @@ public class SousMenus {
 						Energie temp = new Energie(numero, 0);
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_energie(entree, modif)),modif);
 					}
-					System.out.println("La carte ENERGIE NÂ°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte ENERGIE N°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				default:
 					break;
 				}
 			}
-		}
-		
-		private static void afficher_choix_type(){
-			System.out.println("De quel type est la carte ? ");
-			System.out.print("1. Pokemon\t");
-			System.out.print("2. Dresseur\t");
-			System.out.print("3. Energie\n");
-		}
-		
-		private static int choix_type(String nom){
-			int choix = -1;
-			switch (nom.toLowerCase()) {
-			case "pokemon":choix = 1;
-				break;
-			case "dresseur": choix = 2;
-				break;
-			case "energie": choix = 3;
-				break;
-			}
-			
-			return choix;
 		}
 		
 		private static HashMap<String, Object> ajouter_pokemon(Scanner entree,boolean modif){
@@ -165,7 +207,7 @@ public class SousMenus {
 			}
 			System.out.println("Voulez vous : ");
 			System.out.println("1. Remplacer toutes les attaques");
-			System.out.println("2. Ajouter les ataques Ã  votre liste (par defaut)");
+			System.out.println("2. Ajouter les ataques à  votre liste (par defaut)");
 			int choix = Integer.parseInt(Menu.redemander_saisie(entree, 0, false));//HashMap<String, Object>
 			if(choix != 1)map.put("concat_attaques",true);
 			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
@@ -268,40 +310,39 @@ public class SousMenus {
 			map.put("type", (choix - 1));
 			return map;
 		}
-	}
 
-	static class Suppression {
-		public static void lancer(Collection collection) {
-			
+	private static void supprimer(Collection collection) {
+			System.out.println("NON IMPLEMENTE  !!!!!!");
 		}
-	}
 
-	static class Consultation {
-		public static void lancer(Collection collection) {
+	private static void consulter(Collection collection) {
 			System.out.println("\nVotre collection : ");
 			System.out.println(collection);
 		}
-	}
 	
-	static class Recherche {
-		public static void lancer(Collection collection) {
+	private static void rechercher(Collection collection) {
 			Scanner entree = new Scanner(System.in);
 			boolean stop = false;
 			int choix = 0;
 			while(!stop){
 				System.out.println("________________________________________________________________________");
 				System.out.println("Nouvelle recherche : ");
-				System.out.println("Entrez le critere de recherche (5 pour revenir au menu principal) : ");
-				System.out.println("1. \t 2. ");
+				System.out.println("Entrez le critere de recherche (0 pour revenir au menu principal) : ");
+				System.out.println("1.Numero de carte \t 2.Type de carte ");
 				choix = Integer.parseInt(Menu.redemander_saisie(entree, 0 , false));
 				switch (choix) {
 				case 1:
-					System.out.println(collection);
+					System.out.println("Veuillez renseigner le numero de la carte recherchee : ");
+					int num = Integer.parseInt(Menu.redemander_saisie(entree, 0, false));
+					collection.rechercher_par_numero(num);
 					break;
 				case 2:
-					System.out.println(collection);
+					System.out.println("Veuillez renseigner le Type de carte recherche : ");
+					afficher_choix_type();
+					int type = Integer.parseInt(Menu.redemander_saisie(entree, 0, false));
+					collection.rechercher_par_type(choix_type(type));
 					break;
-				case 5:
+				case 0:
 					stop = true;
 					break;
 				default:
@@ -312,4 +353,3 @@ public class SousMenus {
 					
 		}
 	}
-}

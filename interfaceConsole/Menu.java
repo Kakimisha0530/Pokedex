@@ -13,7 +13,8 @@ public class Menu {
 	public static final int SUPPRIMER = 2;
 	public static final int MODIFIER = 3;
 	public static final int CONSULTER = 4;
-	public static final int QUITTER = 5;
+	public static final int RECHERCHER = 5;
+	public static final int QUITTER = 6;
 
 	public void lancer() {
 		Collection pokemon = new Collection();
@@ -50,30 +51,7 @@ public class Menu {
 	}
 
 	private boolean lancer_menu_choix(int choix,Collection collection) {
-		boolean stop = false;
-		switch (choix) {
-		case Menu.AJOUTER:
-			SousMenus.Ajout.lancer(collection,false);
-			break;
-		case Menu.SUPPRIMER:
-			SousMenus.Suppression.lancer(collection);
-			break;
-		case Menu.MODIFIER:
-			SousMenus.Ajout.lancer(collection,true);
-			break;
-		case Menu.CONSULTER:
-			SousMenus.Consultation.lancer(collection);
-			break;
-		case Menu.QUITTER:
-			stop = true;
-			break;
-
-		default:
-			System.out.println("Cette entree n'est pas valide. Veuillez recommencer : ");
-			break;
-		}
-
-		return stop;
+		return SousMenus.lancer(choix,collection);
 	}
 
 	private void afficher_menu() {
@@ -83,6 +61,7 @@ public class Menu {
 		System.out.println("2. SUPPRIMER UNE CARTE");
 		System.out.println("3. MODIFIER UNE CARTE");
 		System.out.println("4. CONSULTER MES CARTES");
-		System.out.println("5. QUITTER");
+		System.out.println("5. RECHERCHER DANS MES CARTES");
+		System.out.println("6. QUITTER");
 	}
 }

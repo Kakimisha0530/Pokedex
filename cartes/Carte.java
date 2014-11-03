@@ -30,6 +30,10 @@ public abstract class Carte implements Serializable,Cloneable{
 		}
 		return false;
 	}
+	
+	public boolean est_de_type(String type){
+		return this.type_de_carte().toLowerCase().equals(type.toLowerCase());
+	}
 
 	public abstract String type_de_carte();
 	

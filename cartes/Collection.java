@@ -46,13 +46,11 @@ public class Collection extends SauvegardeBinaire{
 		this.sauvegarder();
 	}
 
-	public void supprimer_une_carte(int index) {
-		if(index < this.collection.size()){
-			Carte carte = this.collection.get(index);
-			this.statistiques.put(carte.get_numero(), this.statistiques.get(carte.get_numero()) - 1);
-			if(this.statistiques.get(carte.get_numero()) < 1)
-				this.liste_de_cartes_uniques.remove(carte.get_numero());
-			this.collection.remove(index);
+	public void supprimer_une_carte(int num,int nombre) {
+		if(existe_carte(num)){
+			Carte carte = this.liste_de_cartes_uniques.get(num);
+			while(nombre > 0)
+				this.collection.remove(this.collection.indexOf(carte));
 			this.actualiser();
 		}
 	}
@@ -108,21 +106,41 @@ public class Collection extends SauvegardeBinaire{
 		}			
 	}
 	
-	public String toString(){
+	public String afficher_liste_carte(HashMap<Integer, Carte> liste,String message){
+		
 		String sep = "\n*****************************************************";
 		String chaine = "";
 		chaine += sep;
 		
-		if(this.collection.size() > 0){
-			for (int num : this.liste_de_cartes_uniques.keySet()) {
+		if(liste.size() > 0){
+			for (int num : liste.keySet()) {
 				chaine += "\n" + this.consulter_la_carte(num);
 				chaine += sep;
 			}
 		}
 		else
-			chaine += "\nVous n'avez encore aucune carte !!" + sep;
+			chaine += "\n" + message + sep;
 		
 		return chaine;
+	}
+	
+	public String toString(){
+		return this.afficher_liste_carte(liste_de_cartes_uniques, "Vous n'avez encore aucune carte !!");
+	}
+	
+	public void rechercher_par_numero(int num){
+		if(existe_carte(num))
+			System.out.println(this.consulter_la_carte(num));
+		else
+			System.out.println("Aucune carte n'a ete trouvee pour le numero \"" + num + "\" !!");
+	}
+	
+	public void rechercher_par_type(String type){
+		HashMap<Integer, Carte> liste = new HashMap<Integer, Carte>();
+		for(Carte carte:this.collection)
+			if(carte.est_de_type(type))
+				liste.put(carte.get_numero(), carte);
+		System.out.println(this.afficher_liste_carte(liste, "Aucune carte n'a ete trouvee pour le type \"" + type + "\" !!"));
 	}
 
 	public String get_type(int numero) {
