@@ -49,8 +49,12 @@ public class Collection extends SauvegardeBinaire{
 	public void supprimer_une_carte(int num,int nombre) {
 		if(existe_carte(num)){
 			Carte carte = this.liste_de_cartes_uniques.get(num);
-			while(nombre > 0)
-				this.collection.remove(this.collection.indexOf(carte));
+			while(nombre > 0){
+				int index = this.collection.indexOf(carte);
+				System.out.println(index);
+				this.collection.remove(index);
+			}
+				
 			this.actualiser();
 		}
 	}
