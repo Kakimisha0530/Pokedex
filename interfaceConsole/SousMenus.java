@@ -124,7 +124,7 @@ public class SousMenus {
 						Pokemon temp = new Pokemon(numero, 0, 0, "", 0, null);
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_pokemon(entree, modif)),modif);
 					}
-					System.out.println("La carte POKEMON N°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte POKEMON Nï¿½" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				case 2:
 					if(modif)
@@ -133,7 +133,7 @@ public class SousMenus {
 						Dresseur temp = new Dresseur(numero, 0, "", "");
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_dresseur(entree, modif)),modif);
 					}
-					System.out.println("La carte DRESSEUR N°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte DRESSEUR Nï¿½" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				case 3:
 					if(modif)
@@ -142,7 +142,7 @@ public class SousMenus {
 						Energie temp = new Energie(numero, 0);
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_energie(entree, modif)),modif);
 					}
-					System.out.println("La carte ENERGIE N°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte ENERGIE Nï¿½" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				default:
 					break;
@@ -207,7 +207,7 @@ public class SousMenus {
 			}
 			System.out.println("Voulez vous : ");
 			System.out.println("1. Remplacer toutes les attaques");
-			System.out.println("2. Ajouter les ataques à  votre liste (par defaut)");
+			System.out.println("2. Ajouter les ataques ï¿½ votre liste (par defaut)");
 			int choix = Integer.parseInt(Menu.redemander_saisie(entree, 0, false));//HashMap<String, Object>
 			if(choix != 1)map.put("concat_attaques",true);
 			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
@@ -312,8 +312,45 @@ public class SousMenus {
 		}
 
 	private static void supprimer(Collection collection) {
-			System.out.println("NON IMPLEMENTE  !!!!!!");
+		Scanner entree = new Scanner(System.in);
+		boolean stop = false;
+		while(!stop){
+			System.out.println("--------------------------------------------------------------------------");
+			System.out.println("Entrez le numero de la carte a supprimer (0 pour revenir au menu principal) : ");
+			int numero = Integer.parseInt(Menu.redemander_saisie(entree, 0 , false));
+			if(numero == 0)
+				stop = true;
+			else{
+				System.out.println(collection.consulter_la_carte(numero));
+				System.out.println();
+				if(collection.existe_carte(numero)){
+					System.out.println("Voulez vous supprimer tous les exemplaires de cette carte ? (O/N)");
+					String choix = Menu.redemander_saisie(entree, 1, true);
+					
+					while(!est_oui_ou_non(choix))
+						choix = Menu.redemander_saisie(entree, 1, true);
+					String chaine = Utils.nettoyer_chaine(choix).toLowerCase();
+					
+					if(chaine.equals("n") || chaine.equals("non")){
+						System.out.println("Entrez le nombre d'exemplaires a supprimer : ");
+						int nb = Integer.parseInt(Menu.redemander_saisie(entree, 0, false));
+						collection.supprimer_une_carte(numero, nb);
+						System.out.println(nb + " exemplaires de la carte ont ete supprimes !!");
+					}
+					else if(chaine.equals("o") || chaine.equals("oui") || chaine.equals("")){
+						collection.supprimer_une_carte(numero, -1);
+						System.out.println("Tous les exemplaires de la carte ont ete supprimes !!");
+					}
+				}
+			}
 		}
+	}
+	
+	private static boolean est_oui_ou_non(String choix){
+		String chaine = Utils.nettoyer_chaine(choix).toLowerCase();
+		return chaine.equals("n") || chaine.equals("non") || chaine.equals("o") 
+				|| chaine.equals("oui") || chaine.equals("");
+	}
 
 	private static void consulter(Collection collection) {
 			System.out.println("\nVotre collection : ");

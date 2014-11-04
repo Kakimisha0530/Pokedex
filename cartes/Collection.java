@@ -49,10 +49,14 @@ public class Collection extends SauvegardeBinaire{
 	public void supprimer_une_carte(int num,int nombre) {
 		if(existe_carte(num)){
 			Carte carte = this.liste_de_cartes_uniques.get(num);
-			while(nombre >= 0){
+			if(nombre < 0 || nombre > this.statistiques.get(num))
+				nombre = this.statistiques.get(num);
+			
+			while(nombre > 0){
 				int index = this.collection.indexOf(carte);
 				System.out.println(index);
-				this.collection.remove(index);
+				if(index > 0)this.collection.remove(index);
+				nombre --;
 			}
 				
 			this.actualiser();
@@ -69,9 +73,11 @@ public class Collection extends SauvegardeBinaire{
 	public boolean ajouter_une_carte(Carte carte,boolean modif) {
 		if(carte != null && carte.numero_inferieur_a(this.taille)){
 			if(modif){
+				int nb = this.statistiques.get(carte.get_numero());
 				this.supprimer_une_carte(carte.get_numero(), this.statistiques.get(carte.get_numero()));
-				for(int i = 0;i < this.statistiques.get(carte.get_numero());i++)
+				for(int i = 0;i < nb ;i++)
 					this.collection.add(carte);
+					
 			}
 			else
 				this.collection.add(carte);
@@ -129,7 +135,13 @@ public class Collection extends SauvegardeBinaire{
 	}
 	
 	public String toString(){
-		return this.afficher_liste_carte(liste_de_cartes_uniques, "Vous n'avez encore aucune carte !!");
+		String chaine = "";
+		if(this.collection.size() > 0){
+			chaine += "\nVous possedez au total " + this.collection.size() + " cartes";
+			chaine += " dont " + this.liste_de_cartes_uniques.size() + " cartes uniques.\n";
+		}
+		chaine += this.afficher_liste_carte(liste_de_cartes_uniques, "Vous n'avez encore aucune carte !!");
+		return chaine;
 	}
 	
 	public void rechercher_par_numero(int num){

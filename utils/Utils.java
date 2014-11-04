@@ -22,6 +22,8 @@ public class Utils {
 	}
 	
 	public static String nettoyer_chaine(String s) {
+		if(s == null)
+			s = "";
 		return s.replace(" ", "").replace("\t","").replace("\n","").replace("\r","");
 	}
 }
