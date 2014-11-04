@@ -124,7 +124,7 @@ public class SousMenus {
 						Pokemon temp = new Pokemon(numero, 0, 0, "", 0, null);
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_pokemon(entree, modif)),modif);
 					}
-					System.out.println("La carte POKEMON Nï¿½" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte POKEMON N" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				case 2:
 					if(modif)
@@ -142,7 +142,7 @@ public class SousMenus {
 						Energie temp = new Energie(numero, 0);
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_energie(entree, modif)),modif);
 					}
-					System.out.println("La carte ENERGIE Nï¿½" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte ENERGIE N°" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				default:
 					break;

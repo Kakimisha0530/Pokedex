@@ -2,6 +2,8 @@ package cartes;
 
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 /**
  * Cette classe repr&eacute;sente les cartes de type Dresseur. Ils en existe
  * trois types qui sont : Chaque carte poss&egrave;de un nom, un numero dans la
@@ -71,5 +73,12 @@ public class Dresseur extends Carte {
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
 		return super.equals(obj);
+	}
+
+	@Override
+	public Carte json_en_carte(String json) {
+		Gson gson = new Gson();
+		Dresseur carte = gson.fromJson(json, this.getClass());
+		return carte;
 	}
 }

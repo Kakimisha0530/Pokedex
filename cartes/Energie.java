@@ -2,6 +2,8 @@ package cartes;
 
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 public class Energie extends Carte {
 
 	private transient static final long serialVersionUID = 1L;
@@ -48,6 +50,13 @@ public class Energie extends Carte {
 			type = ((Integer)map.get("type") < 0 || (Integer)map.get("type") > TypeEnergie.NOMS.length)?this.type_energie:(Integer)map.get("type");
 		
 		return new Energie(this.numero, type);
+	}
+	
+	@Override
+	public Carte json_en_carte(String json) {
+		Gson gson = new Gson();
+		Energie carte = gson.fromJson(json, this.getClass());
+		return carte;
 	}
 
 }

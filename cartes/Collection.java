@@ -6,6 +6,10 @@ package cartes;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+
 import sauvegarde.SauvegardeBinaire;
 
 /**
@@ -55,7 +59,7 @@ public class Collection extends SauvegardeBinaire{
 			while(nombre > 0){
 				int index = this.collection.indexOf(carte);
 				System.out.println(index);
-				if(index > 0)this.collection.remove(index);
+				if(index >= 0)this.collection.remove(index);
 				nombre --;
 			}
 				
@@ -165,5 +169,43 @@ public class Collection extends SauvegardeBinaire{
 		return "";
 	}
 	
-	
+	public void json_en_java(){
+		Gson gson = new Gson();
+		String chaine = convertir_en_json();
+		if(this.collection == null)
+			this.collection = new ArrayList<Carte>();
+		chaine = chaine.substring(1, (chaine.length() - 1));
+		String[] liste = chaine.split(",");
+	    for(String s : liste){
+	    	Carte c = gson.fromJson(s, Carte.class);
+	    	String type = c.type_de_carte().toLowerCase();
+	    	switch(type){
+	    	case "dresseur": 
+	    		Dresseur d = new Dresseur(0, 0, "", "");
+	    		this.collection.add(d.json_en_carte(s));
+	    		break;
+	    	case "pokemon": 
+	    		Pokemon p = new Pokemon(0, 0, 0, "", 0, null);
+	    		this.collection.add(p.json_en_carte(s));
+	    		break;
+	    	case "energie": 
+	    		Energie e = new Energie(0, 0);
+	    		this.collection.add(e.json_en_carte(s));
+	    		break;
+	    	}
+	    }
+	    
+	}
+
+	public String convertir_en_json() {
+		Gson gson = new Gson();
+		String chaine = "[";
+		for(Carte c : this.collection)
+			chaine += gson.toJson(c) + ",";
+		if(chaine.charAt(chaine.length() - 1) == ',')
+			chaine = chaine.substring(0, (chaine.length() - 1));
+		chaine += "]";
+		
+		return chaine;
+	}
 }

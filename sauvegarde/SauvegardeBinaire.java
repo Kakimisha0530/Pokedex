@@ -19,8 +19,8 @@ import java.net.URL;
 public abstract class SauvegardeBinaire implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String repertoire = "";
-	private final String NOM_FICHIER = "pokemon";
+	private transient String repertoire = "";
+	private transient static final String FICHIER_PAR_DEFAUT = "pokemon";
 
 	public SauvegardeBinaire() {
 		URL chemin = this.getClass().getResource("");
@@ -42,10 +42,9 @@ public abstract class SauvegardeBinaire implements Serializable {
 	public boolean sauvegarder() {
 		try {
 			File temp = new File(this.repertoire);
-			//System.out.println(this.repertoire);
 			if(!temp.exists())
 				temp.mkdirs();
-			FileOutputStream fichier = new FileOutputStream(this.repertoire + this.NOM_FICHIER);
+			FileOutputStream fichier = new FileOutputStream(this.repertoire + FICHIER_PAR_DEFAUT);
 			ObjectOutputStream stream = new ObjectOutputStream(fichier);
 			stream.writeObject(this);
 			stream.flush();
@@ -60,7 +59,7 @@ public abstract class SauvegardeBinaire implements Serializable {
 	protected boolean recuperer() {
 		try {
 			FileInputStream fichier = new FileInputStream(this.repertoire
-					+ this.NOM_FICHIER);
+					+ FICHIER_PAR_DEFAUT);
 			ObjectInputStream stream = new ObjectInputStream(fichier);
 			this.charger(stream.readObject());
 			stream.close();

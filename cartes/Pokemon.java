@@ -2,6 +2,8 @@ package cartes;
 
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 /**
  * 
  * @author aicha
@@ -94,5 +96,12 @@ public class Pokemon extends Carte
 		}
 		
 		return new Pokemon(this.numero, type_bis , pts_de_vie, nom_bis, niveau_bis, att);
+	}
+	
+	@Override
+	public Carte json_en_carte(String json) {
+		Gson gson = new Gson();
+		Pokemon carte = gson.fromJson(json, this.getClass());
+		return carte;
 	}
 }
