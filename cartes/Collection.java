@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 
 import sauvegarde.SauvegardeBinaire;
 
@@ -170,29 +168,32 @@ public class Collection extends SauvegardeBinaire{
 	}
 	
 	public void json_en_java(){
-		Gson gson = new Gson();
 		String chaine = convertir_en_json();
+		System.out.println(chaine);
+		System.out.println();
 		if(this.collection == null)
 			this.collection = new ArrayList<Carte>();
 		chaine = chaine.substring(1, (chaine.length() - 1));
 		String[] liste = chaine.split(",");
 	    for(String s : liste){
-	    	Carte c = gson.fromJson(s, Carte.class);
-	    	String type = c.type_de_carte().toLowerCase();
-	    	switch(type){
-	    	case "dresseur": 
+	    	/*if(s.indexOf("\"type_de_carte\":\"DRESSEUR\"") >= 0){
 	    		Dresseur d = new Dresseur(0, 0, "", "");
 	    		this.collection.add(d.json_en_carte(s));
-	    		break;
-	    	case "pokemon": 
+	    		System.out.println("dresseur");
+	    	}
+	    	else if(s.indexOf("\"type_de_carte\":\"POKEMON\"") >= 0){
 	    		Pokemon p = new Pokemon(0, 0, 0, "", 0, null);
 	    		this.collection.add(p.json_en_carte(s));
-	    		break;
-	    	case "energie": 
+	    		System.out.println("pokemon");
+	    	}
+	    	else if(s.indexOf("\"type_de_carte\":\"ENERGIE\"") >= 0){
 	    		Energie e = new Energie(0, 0);
 	    		this.collection.add(e.json_en_carte(s));
-	    		break;
-	    	}
+	    		System.out.println("energie");
+	    	}*/
+	    	
+	    	System.out.println(s);
+	    	
 	    }
 	    
 	}
