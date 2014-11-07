@@ -9,6 +9,7 @@ public abstract class Carte implements Serializable,Cloneable{
 	protected String nom;
 	protected int numero;
 	private String type_de_carte;
+	private String image;
 
 	public Carte(int num, String nom) {
 		this.nom = nom;

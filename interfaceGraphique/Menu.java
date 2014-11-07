@@ -24,7 +24,9 @@ public class Menu extends JFrame{
 		this.collection = co;
 		if(this.collection == null)
 			this.collection = new Collection();
-		
+	}
+	
+	public void lancer(){
 		this.initialiser();
 	}
 	
@@ -54,7 +56,7 @@ public class Menu extends JFrame{
 	
 	class Ajouter implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+			new FenetreAjout(collection);
 		}
 	}
 	class Supprimer implements ActionListener {
