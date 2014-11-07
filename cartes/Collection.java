@@ -47,6 +47,10 @@ public class Collection extends SauvegardeBinaire{
 		}
 		this.sauvegarder();
 	}
+	
+	public int nombre_de_carte(){
+		return this.collection.size();
+	}
 
 	public void supprimer_une_carte(int num,int nombre) {
 		if(existe_carte(num)){
@@ -102,6 +106,20 @@ public class Collection extends SauvegardeBinaire{
 	public String consulter_la_carte(int numero) {
 		return (this.liste_de_cartes_uniques.get(numero) != null) ? (this.liste_de_cartes_uniques
 				.get(numero).toString() + "\nExemplaires : " + this.statistiques.get(numero)) : "Cette carte n'existe pas";
+	}
+	
+	public HashMap<String, Object> information_sur_la_carte(int numero) {
+		if(existe_carte(numero))
+			return this.liste_de_cartes_uniques.get(numero).informations_sur_la_carte();
+		return null;
+	}
+	
+	public ArrayList<Integer> liste_de_carte(){
+		ArrayList<Integer> liste = new ArrayList<Integer>();
+		for(Integer numero : this.liste_de_cartes_uniques.keySet())
+			liste.add(numero);
+		
+		return liste;
 	}
 	
 	public boolean existe_carte(int numero){

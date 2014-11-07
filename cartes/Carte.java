@@ -53,4 +53,5 @@ public abstract class Carte implements Serializable,Cloneable{
 
 	public abstract Carte modifier_carte(HashMap<String, Object> map);
 	public abstract Carte json_en_carte(String json);
+	public abstract HashMap<String, Object> informations_sur_la_carte();
 }

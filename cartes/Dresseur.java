@@ -81,4 +81,14 @@ public class Dresseur extends Carte {
 		Dresseur carte = gson.fromJson(json, this.getClass());
 		return carte;
 	}
+	
+	@Override
+	public HashMap<String, Object> informations_sur_la_carte() {
+		HashMap<String, Object> liste = new HashMap<String, Object>();
+		liste.put("numero", this.numero);
+		liste.put("nom", this.nom);
+		liste.put("actions", this.actions);
+		liste.put("type_dresseur", TYPE_DRESSEUR_NOM[this.type_dresseur]);
+		return liste;
+	}
 }

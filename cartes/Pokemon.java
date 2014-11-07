@@ -104,4 +104,17 @@ public class Pokemon extends Carte
 		Pokemon carte = gson.fromJson(json, this.getClass());
 		return carte;
 	}
+
+
+	@Override
+	public HashMap<String, Object> informations_sur_la_carte() {
+		HashMap<String, Object> liste = new HashMap<String, Object>();
+		liste.put("numero", this.numero);
+		liste.put("nom", this.nom);
+		liste.put("niveau", this.niveau);
+		liste.put("points_de_vie", this.points_de_vie);
+		liste.put("type_energie", TypeEnergie.NOMS[this.type_energie]);
+		liste.put("attaques", this.attaques);
+		return liste;
+	}
 }

@@ -58,5 +58,13 @@ public class Energie extends Carte {
 		Energie carte = gson.fromJson(json, this.getClass());
 		return carte;
 	}
+	
+	@Override
+	public HashMap<String, Object> informations_sur_la_carte() {
+		HashMap<String, Object> liste = new HashMap<String, Object>();
+		liste.put("numero", this.numero);
+		liste.put("type_energie", TypeEnergie.NOMS[this.type_energie]);
+		return liste;
+	}
 
 }
