@@ -8,8 +8,7 @@ package interfaceGraphique;
 public class Main {
 	
 	public static void main(String[] args) {
-		Menu menu = new Menu(null);
-		
+		Menu menu = new Menu(null);		
 		menu.lancer();
 	}
 }

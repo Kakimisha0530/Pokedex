@@ -11,9 +11,10 @@ public abstract class Carte implements Serializable,Cloneable{
 	private String type_de_carte;
 	private String image;
 
-	public Carte(int num, String nom) {
+	public Carte(int num, String nom,String image) {
 		this.nom = nom;
 		this.numero = num;
+		this.image = image;
 		this.type_de_carte = this.type_de_carte();
 	}
 	
@@ -23,6 +24,14 @@ public abstract class Carte implements Serializable,Cloneable{
 	
 	public int get_numero(){
 		return this.numero;
+	}
+	
+	public String get_image(){
+		return this.image;
+	}
+	
+	public void set_image(String path){
+		this.image = path;
 	}
 	
 	@Override

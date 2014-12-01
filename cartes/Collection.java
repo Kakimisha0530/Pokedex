@@ -6,8 +6,6 @@ package cartes;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.google.gson.Gson;
-
 import sauvegarde.SauvegardeBinaire;
 
 /**
@@ -217,12 +215,12 @@ public class Collection extends SauvegardeBinaire{
 	}
 
 	public String convertir_en_json() {
-		Gson gson = new Gson();
+		//Gson gson = new Gson();
 		String chaine = "[";
-		for(Carte c : this.collection)
+		/*for(Carte c : this.collection)
 			chaine += gson.toJson(c) + ",";
 		if(chaine.charAt(chaine.length() - 1) == ',')
-			chaine = chaine.substring(0, (chaine.length() - 1));
+			chaine = chaine.substring(0, (chaine.length() - 1));*/
 		chaine += "]";
 		
 		return chaine;

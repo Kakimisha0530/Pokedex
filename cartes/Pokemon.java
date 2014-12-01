@@ -2,8 +2,6 @@ package cartes;
 
 import java.util.HashMap;
 
-import com.google.gson.Gson;
-
 /**
  * 
  * @author aicha
@@ -20,7 +18,7 @@ public class Pokemon extends Carte
 	
 	
 	public Pokemon(int num,int type,int pts_de_vies,String nom,int niveau,HashMap<String,Attaque> attaques) {
-		super(num,nom);
+		super(num,nom,"default.png");
 		if(attaques != null)
 			this.attaques = attaques;
 		else
@@ -41,7 +39,7 @@ public class Pokemon extends Carte
 		chaine += " / " + NIVEAU_NOM[this.niveau];
 		chaine += "\nNom : " + this.nom;
 		chaine += "\nPoints de vies : " + this.points_de_vie;
-		chaine += "\nEnergie : " + TypeEnergie.NOMS[this.type_energie];
+		chaine += "\nEnergie : " + TypeEnergie.values()[this.type_energie].name();
 		chaine += "\n\t\t ATTAQUES : \n";
 		int i = 0;
 		for(String s : this.attaques.keySet()){
@@ -50,7 +48,7 @@ public class Pokemon extends Carte
 			i++;
 		}
 		chaine += "\n========================================";
-		chaine += "\nN° : " + this.numero;
+		chaine += "\nNï¿½ : " + this.numero;
 		return chaine;
 	}
 	
@@ -79,7 +77,7 @@ public class Pokemon extends Carte
 		if(map.get("nom") instanceof String && !map.get("nom").equals(""))
 			nom_bis = map.get("nom").toString();
 		if(map.get("type") instanceof Integer)
-			type_bis = ((Integer)map.get("type") < 0 || (Integer)map.get("type") > TypeEnergie.NOMS.length)?this.type_energie:(Integer)map.get("type");
+			type_bis = ((Integer)map.get("type") < 0 || (Integer)map.get("type") > TypeEnergie.values().length)?this.type_energie:(Integer)map.get("type");
 		if(map.get("pts_de_vie") instanceof Integer)
 			pts_de_vie = ((Integer)map.get("pts_de_vie") > 0)?(Integer)map.get("pts_de_vie"):this.points_de_vie;
 		if(map.get("niveau") instanceof Integer)
@@ -100,9 +98,10 @@ public class Pokemon extends Carte
 	
 	@Override
 	public Carte json_en_carte(String json) {
-		Gson gson = new Gson();
+		return null;
+		/*Gson gson = new Gson();
 		Pokemon carte = gson.fromJson(json, this.getClass());
-		return carte;
+		return carte;*/
 	}
 
 
@@ -113,7 +112,7 @@ public class Pokemon extends Carte
 		liste.put("nom", this.nom);
 		liste.put("niveau", this.niveau);
 		liste.put("points_de_vie", this.points_de_vie);
-		liste.put("type_energie", TypeEnergie.NOMS[this.type_energie]);
+		liste.put("type_energie", TypeEnergie.values()[this.type_energie].name());
 		liste.put("attaques", this.attaques);
 		return liste;
 	}

@@ -2,7 +2,6 @@ package cartes;
 
 import java.util.HashMap;
 
-import com.google.gson.Gson;
 
 /**
  * Cette classe repr&eacute;sente les cartes de type Dresseur. Ils en existe
@@ -20,7 +19,7 @@ public class Dresseur extends Carte {
 	private transient static final String[] TYPE_DRESSEUR_REGLE = { "", "", "" };
 
 	public Dresseur(int num, int type, String nom, String actions) {
-		super(num, nom);
+		super(num, nom,"default.png");
 		this.type_dresseur = type;
 		this.actions = actions;
 	}
@@ -77,9 +76,10 @@ public class Dresseur extends Carte {
 
 	@Override
 	public Carte json_en_carte(String json) {
-		Gson gson = new Gson();
+		/*Gson gson = new Gson();
 		Dresseur carte = gson.fromJson(json, this.getClass());
-		return carte;
+		return carte;*/
+		return null;
 	}
 	
 	@Override
