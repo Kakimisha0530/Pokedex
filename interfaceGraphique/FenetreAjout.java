@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -23,6 +21,7 @@ import utils.Utils;
 import cartes.Carte.TypeDeCarte;
 import cartes.Carte;
 import cartes.Collection;
+import cartes.TypeEnergie;
 
 public class FenetreAjout {
 
@@ -208,7 +207,7 @@ public class FenetreAjout {
 	}
 
 	private void choix_type() {
-		this.fenetre.setSize(500, 100);
+		this.fenetre.setSize(500, 150);
 		contentPane.removeAll();
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -260,6 +259,46 @@ public class FenetreAjout {
 	}
 
 	private void carte_energie() {
-		System.out.println("energie");
+		this.fenetre.setSize(500, 300);
+		contentPane.removeAll();
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(6, 3, 10, 20));
+		panel.add(new JPanel());
+		panel.add(new JLabel("Types d'energie"));
+		panel.add(new JPanel());
+		
+		for(TypeEnergie en : TypeEnergie.values()){
+			JLabel label = new JLabel(en.name());
+			panel.add(label);
+		}
+		
+		panel.add(new JPanel());
+		panel.add(new JPanel());
+		panel.add(new JPanel());
+		JButton terminer = new JButton("Terminer");
+		terminer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				creerCarte();
+			}
+		});
+		panel.add(terminer);
+
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.NORTH);
+
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.WEST);
+
+		JPanel panel_3 = new JPanel();
+		contentPane.add(panel_3, BorderLayout.SOUTH);
+
+		JPanel panel_4 = new JPanel();
+		contentPane.add(panel_4, BorderLayout.EAST);
+	}
+	
+	public void creerCarte(){
+		System.out.println("creation");
 	}
 }

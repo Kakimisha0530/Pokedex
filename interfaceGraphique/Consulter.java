@@ -1,18 +1,11 @@
 package interfaceGraphique;
 
 import java.awt.BorderLayout;
-import java.awt.Image;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
-import java.awt.Font;
 
 public class Consulter extends JFrame {
 
@@ -44,9 +37,9 @@ public class Consulter extends JFrame {
 		panel_1.add(new JPanel());
 		panel_1.add(new JPanel());
 		panel_1.add(new JPanel());
-		JLabel edit = new JLabel(new ImageIcon("images/edit.png"));
+		JLabel edit = new JLabel("E");//new ImageIcon("images/edit.png"));
 		panel_1.add(edit);
-		JLabel delete = new JLabel(new ImageIcon("images/del.png"));
+		JLabel delete = new JLabel("D");//new ImageIcon("images/del.png"));
 		panel_1.add(delete);
 		panel_1.add(new JPanel());
 		
@@ -68,14 +61,14 @@ public class Consulter extends JFrame {
 		contentPane.add(panel_3, BorderLayout.EAST);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JLabel suivant = new JLabel(new ImageIcon("images/next.png"));
+		JLabel suivant = new JLabel(">");//new ImageIcon("images/next.png"));
 		panel_3.add(suivant);
 		
 		JPanel panel_4 = new JPanel();
 		contentPane.add(panel_4, BorderLayout.WEST);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
-		JLabel precedent = new JLabel(new ImageIcon("images/prev.png"));
+		JLabel precedent = new JLabel("<");//new ImageIcon("images/prev.png"));
 		panel_4.add(precedent);
 		precedent.setVisible(false);
 	}
