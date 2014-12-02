@@ -3,6 +3,9 @@ package interfaceGraphique;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
@@ -10,52 +13,81 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cartes.Collection;
 
-public class FenetreConsulter extends JFrame {
+public class FenetreConsulter{
 
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private Collection collection;
 	private JPanel contentPane;
+	private JFrame fenetre;
 	private JLabel suivant ,precedent;
 	private JLabel carte;
 	private String repertoire;
 	private ArrayList<Integer> liste_vue;
 	private int vue;
+	private boolean recherche = false;
 
-	public FenetreConsulter(Collection co) {
+	public FenetreConsulter(Collection co,ArrayList<Integer> nums) {
 		this.collection = co;
 		if (this.collection == null)
 			this.collection = new Collection();
 
-		this.liste_vue = this.collection.liste_de_carte();
+		if(nums != null){
+			this.liste_vue = nums;
+			this.recherche = true;
+		}
+		else
+			this.liste_vue = this.collection.liste_de_carte();
 		URL chemin = this.getClass().getResource("");
 		String uri = chemin.getPath();
 		this.repertoire = uri.split("bin")[0];
 		this.repertoire += "ressources/images/";
 
 		this.initialiser();
-		this.setVisible(true);
+		this.fenetre.setVisible(true);
 	}
 
 	private void initialiser() {
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setTitle("Consulter mes cartes");
-		this.setSize(500, 600);
+		this.fenetre = new JFrame();
+		this.fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.fenetre.setTitle("Consulter mes cartes");
+		this.fenetre.setSize(500, 600);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
-		this.setContentPane(contentPane);
+		this.fenetre.setContentPane(contentPane);
 		
 		JPanel centre = new JPanel();
 		contentPane.add(centre, BorderLayout.CENTER);
 		
 		JPanel entete = new JPanel();
 		contentPane.add(entete, BorderLayout.NORTH);
-		contentPane.add(new JPanel(), BorderLayout.SOUTH);
+		JPanel pied = new JPanel();
+		contentPane.add(pied, BorderLayout.SOUTH);
+		pied.setLayout(new GridLayout(2, 4, 10, 10));
+		
+		JButton btnRetour = new JButton("RETOUR");
+		btnRetour.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(recherche)
+					new FenetreRecherche(collection);
+				fenetre.dispose();
+			}
+		});
+		pied.add(btnRetour);
+		pied.add(new JPanel());
+		pied.add(new JPanel());
+		pied.add(new JPanel());
+		pied.add(new JPanel());
+		pied.add(new JPanel());
+		pied.add(new JPanel());
+		pied.add(new JPanel());
 		
 		JPanel gauche = new JPanel();
 		contentPane.add(gauche, BorderLayout.EAST);
@@ -73,8 +105,8 @@ public class FenetreConsulter extends JFrame {
 		
 		carte = new JLabel("aucun visuel");
 		carte.setVisible(true);
-		carte.setFont(new Font("Serif", Font.PLAIN, 14));
-		carte.setForeground(Color.MAGENTA);
+		carte.setFont(new Font("Serif", Font.BOLD, 14));
+		carte.setForeground(Color.CYAN);
 		centre.add(carte);
 		this.vue = 0;
 		afficher(this.vue, 0);

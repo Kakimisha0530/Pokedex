@@ -91,13 +91,13 @@ public class Menu extends JFrame{
 	
 	class Consulter implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			new FenetreConsulter(collection);
+			new FenetreConsulter(collection,null);
 		}
 	}
 	
 	class Rechercher implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+			new FenetreRecherche(collection);
 		}
 	}
 	

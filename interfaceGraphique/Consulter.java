@@ -52,11 +52,17 @@ public class Consulter extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
+		panel_2.setLayout(new GridLayout(2, 4, 10, 10));
 		
-		JLabel lblNewLabel = new JLabel("     ");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 43));
-		panel_2.add(lblNewLabel);
+		JButton btnRetour = new JButton("RETOUR");
+		panel_2.add(btnRetour);
+		panel_2.add(new JPanel());
+		panel_2.add(new JPanel());
+		panel_2.add(new JPanel());
+		panel_2.add(new JPanel());
+		panel_2.add(new JPanel());
+		panel_2.add(new JPanel());
+		panel_2.add(new JPanel());
 		
 		JPanel panel_3 = new JPanel();
 		contentPane.add(panel_3, BorderLayout.EAST);

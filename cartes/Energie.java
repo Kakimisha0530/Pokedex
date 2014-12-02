@@ -14,7 +14,7 @@ public class Energie extends Carte {
 
 	@Override
 	public String type_de_carte() {
-		return "ENERGIE";
+		return Carte.TypeDeCarte.ENERGIE.name();
 	}
 	
 	public static void affiche_energies_types(){
@@ -62,6 +62,7 @@ public class Energie extends Carte {
 	@Override
 	public HashMap<String, Object> informations_sur_la_carte() {
 		HashMap<String, Object> liste = new HashMap<String, Object>();
+		liste.put("type", this.type_de_carte());
 		liste.put("numero", this.numero);
 		liste.put("type_energie", TypeEnergie.values()[this.type_energie].name());
 		return liste;

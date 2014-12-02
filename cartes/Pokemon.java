@@ -31,7 +31,7 @@ public class Pokemon extends Carte
 	
 	@Override
 	public String type_de_carte() {
-		return "POKEMON";
+		return Carte.TypeDeCarte.POKEMON.name();
 	}
 
 	public String toString(){
@@ -108,6 +108,7 @@ public class Pokemon extends Carte
 	@Override
 	public HashMap<String, Object> informations_sur_la_carte() {
 		HashMap<String, Object> liste = new HashMap<String, Object>();
+		liste.put("type", this.type_de_carte());
 		liste.put("numero", this.numero);
 		liste.put("nom", this.nom);
 		liste.put("niveau", this.niveau);

@@ -8,14 +8,14 @@ public abstract class Carte implements Serializable,Cloneable{
 	private transient static final long serialVersionUID = 1L;
 	protected String nom;
 	protected int numero;
-	private String type_de_carte;
+	//private String type_de_carte;
 	private String image;
 
 	public Carte(int num, String nom,String image) {
 		this.nom = nom;
 		this.numero = num;
 		this.image = image;
-		this.type_de_carte = this.type_de_carte();
+		//this.type_de_carte = this.type_de_carte();
 	}
 	
 	public boolean numero_inferieur_a(int taille){
@@ -59,6 +59,12 @@ public abstract class Carte implements Serializable,Cloneable{
 			cnse.printStackTrace(System.err);
 		}
 		return o;
+	}
+	
+	public static enum TypeDeCarte{
+		DRESSEUR,
+		ENERGIE,
+		POKEMON;
 	}
 
 	public abstract Carte modifier_carte(HashMap<String, Object> map);

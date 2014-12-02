@@ -39,13 +39,11 @@ public class Recherche extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(4, 2, 10, 20));
-		//panel.add(new JPanel());
-		//panel.add(new JPanel());		
 		JLabel lblNumero = new JLabel("Numero de la carte : ");
 		panel.add(lblNumero);	
 		textField = new JTextField();
 		panel.add(textField);
-		textField.setColumns(10);		
+		textField.setColumns(5);		
 		JLabel lblTypeDeCarte = new JLabel("Type de carte : ");
 		panel.add(lblTypeDeCarte);		
 		JComboBox<String> comboBox = new JComboBox<String>();
@@ -57,8 +55,6 @@ public class Recherche extends JFrame {
 		panel.add(new JPanel());		
 		JButton btnRechercher = new JButton("RECHERCHER");
 		panel.add(btnRechercher);
-		//panel.add(new JPanel());
-		//panel.add(new JPanel());
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);

@@ -142,7 +142,7 @@ public class SousMenus {
 						Energie temp = new Energie(numero, 0);
 						collection.ajouter_une_carte(temp.modifier_carte(ajouter_energie(entree, modif)),modif);
 					}
-					System.out.println("La carte ENERGIE N�" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
+					System.out.println("La carte ENERGIE N�" + numero + " a bien ete " + ((modif)?"modifiee":"ajoutee") + " !!");
 					break;
 				default:
 					break;
@@ -371,13 +371,14 @@ public class SousMenus {
 				case 1:
 					System.out.println("Veuillez renseigner le numero de la carte recherchee : ");
 					int num = Integer.parseInt(Menu.redemander_saisie(entree, 0, false));
-					collection.rechercher_par_numero(num);
+					collection.consulter_la_carte(num);
 					break;
 				case 2:
 					System.out.println("Veuillez renseigner le Type de carte recherche : ");
 					afficher_choix_type();
 					int type = Integer.parseInt(Menu.redemander_saisie(entree, 0, false));
-					collection.rechercher_par_type(choix_type(type));
+					ArrayList<Integer> liste_num = collection.rechercher_par_type(choix_type(type));
+					collection.afficher_liste_carte(liste_num, "Aucune carte de type \"" + choix_type(type) + "\" n'a été trouvée !!");
 					break;
 				case 0:
 					stop = true;

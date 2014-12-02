@@ -107,14 +107,22 @@ public class Collection extends SauvegardeBinaire{
 	}
 	
 	public HashMap<String, Object> information_sur_la_carte(int numero) {
-		if(existe_carte(numero))
-			return this.liste_de_cartes_uniques.get(numero).informations_sur_la_carte();
+		if(existe_carte(numero)){
+			HashMap<String, Object> infos = this.liste_de_cartes_uniques.get(numero).informations_sur_la_carte();
+			infos.put("exemplaires", this.statistiques.get(numero));
+			return infos;
+		}
+		
 		return null;
 	}
 	
 	public ArrayList<Integer> liste_de_carte(){
+		return this.liste_de_carte(this.liste_de_cartes_uniques);
+	}
+	
+	public ArrayList<Integer> liste_de_carte(HashMap<Integer, Carte> cartes){
 		ArrayList<Integer> liste = new ArrayList<Integer>();
-		for(Integer numero : this.liste_de_cartes_uniques.keySet())
+		for(Integer numero : cartes.keySet())
 			liste.add(numero);
 		
 		return liste;
@@ -134,14 +142,14 @@ public class Collection extends SauvegardeBinaire{
 		}			
 	}
 	
-	public String afficher_liste_carte(HashMap<Integer, Carte> liste,String message){
+	public String afficher_liste_carte(ArrayList<Integer> liste,String message){
 		
 		String sep = "\n*****************************************************";
 		String chaine = "";
 		chaine += sep;
 		
 		if(liste.size() > 0){
-			for (int num : liste.keySet()) {
+			for (int num : liste) {
 				chaine += "\n" + this.consulter_la_carte(num);
 				chaine += sep;
 			}
@@ -158,23 +166,29 @@ public class Collection extends SauvegardeBinaire{
 			chaine += "\nVous possedez au total " + this.collection.size() + " cartes";
 			chaine += " dont " + this.liste_de_cartes_uniques.size() + " cartes uniques.\n";
 		}
-		chaine += this.afficher_liste_carte(liste_de_cartes_uniques, "Vous n'avez encore aucune carte !!");
+		ArrayList<Integer> liste = new ArrayList<Integer>();
+		for(int n : liste_de_cartes_uniques.keySet())
+			liste.add(n);
+		chaine += this.afficher_liste_carte(liste, "Vous n'avez encore aucune carte !!");
 		return chaine;
 	}
 	
-	public void rechercher_par_numero(int num){
+	/*public Carte rechercher_par_numero(int num){
 		if(existe_carte(num))
+			return 
 			System.out.println(this.consulter_la_carte(num));
 		else
 			System.out.println("Aucune carte n'a ete trouvee pour le numero \"" + num + "\" !!");
-	}
 	
-	public void rechercher_par_type(String type){
-		HashMap<Integer, Carte> liste = new HashMap<Integer, Carte>();
+			
+	}*/
+	
+	public ArrayList<Integer> rechercher_par_type(String type){
+		ArrayList<Integer> liste = new ArrayList<Integer>();
 		for(Carte carte:this.collection)
 			if(carte.est_de_type(type))
-				liste.put(carte.get_numero(), carte);
-		System.out.println(this.afficher_liste_carte(liste, "Aucune carte n'a ete trouvee pour le type \"" + type + "\" !!"));
+				liste.add(carte.get_numero());
+		return liste;//, "Aucune carte n'a ete trouvee pour le type \"" + type + "\" !!"));
 	}
 
 	public String get_type(int numero) {

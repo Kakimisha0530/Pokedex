@@ -26,7 +26,7 @@ public class Dresseur extends Carte {
 
 	@Override
 	public String type_de_carte() {
-		return "DRESSEUR";
+		return Carte.TypeDeCarte.DRESSEUR.name();
 	}
 
 	public static void affiche_dresseurs_types() {
@@ -85,6 +85,7 @@ public class Dresseur extends Carte {
 	@Override
 	public HashMap<String, Object> informations_sur_la_carte() {
 		HashMap<String, Object> liste = new HashMap<String, Object>();
+		liste.put("type", this.type_de_carte());
 		liste.put("numero", this.numero);
 		liste.put("nom", this.nom);
 		liste.put("actions", this.actions);
